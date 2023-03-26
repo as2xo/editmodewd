@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+	    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница — Kalyambikus</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">  
+  
+		<link rel="stylesheet" href="./css/style.css" />
+		<meta name="format-detection" content="telephone-no" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+			
+		</head>
+	<body>
+		
+		<div class="wrapper">
+			<script src="./js/preloader.js"></script>
+			<script src="./js/header-nav.js"></script>
+			<div class="padpage">
+			<main class="page">
+				<section class="page__section page__section_1">
+
+
+
+					<select id="select-element">
+						<option value="div">div</option>
+						<option value="p">p</option>
+						<option value="h1">h1</option>
+					  </select>
+					  <button id="add-element">Добавить на страницу</button>
+					  
+					  <div class="block"></div>
+					  <div class="infopanel">
+						<p>Выберите элемент и нажмите кнопку "Добавить на страницу"</p>
+					  </div>
+
+					  <p id="editable-paragraph">Это редактируемый параграф.</p>
+<button id="edit-button">Изменить</button>
+
+
+<script>
+	const editableParagraph = document.getElementById("editable-paragraph");
+const editButton = document.getElementById("edit-button");
+
+let editForm = null;
+
+editButton.addEventListener("click", () => {
+  if (editForm) {
+    editForm.remove();
+  }
+  
+  const form = document.createElement("form");
+  const input = document.createElement("input");
+  const applyButton = document.createElement("button");
+  const cancelButton = document.createElement("button");
+
+  form.classList.add("edit-form");
+  input.type = "text";
+  input.value = editableParagraph.innerText;
+  applyButton.type = "submit";
+  applyButton.innerText = "Применить";
+  cancelButton.type = "button";
+  cancelButton.innerText = "Отменить";
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const newText = input.value;
+    editableParagraph.innerText = newText;
+    localStorage.setItem("editable-paragraph-text", newText); // сохраняем данные в локальное хранилище
+    form.remove();
+  });
+
+  cancelButton.addEventListener("click", () => {
+    form.remove();
+  });
+
+  form.appendChild(input);
+  form.appendChild(applyButton);
+  form.appendChild(cancelButton);
+  editableParagraph.after(form);
+  
+  editForm = form;
+});
+
+// Инициализируем текст параграфа при загрузке страницы
+editableParagraph.innerText = localStorage.getItem("editable-paragraph-text") || editableParagraph.innerText;
+
+</script>					  
+
+
+
+
+
+				</section>
+
+			</main>
+		</div>
+
+		</div>
+
+		
+	</body>
+</html>
